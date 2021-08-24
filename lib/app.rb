@@ -34,10 +34,6 @@ class MakersBnB < Sinatra::Base
       redirect('/login')
     end 
   end
-
-  get '/spaces' do
-    "Book a space" 
-  end
-
+  
   run! if app_file == $0
 end
