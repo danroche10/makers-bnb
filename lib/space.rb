@@ -38,10 +38,13 @@ class Space
   end
 
   def self.connect_db
-    if ENV['ENVIRONMENT'] = 'test'
+    if ENV['ENVIRONMENT'] == 'test'
       @connection = PG.connect(dbname: 'makers_bnb_test')
     else
       @connection = PG.connect(dbname: 'makers_bnb')
     end
   end
 end
+
+p Space.create("name1", "description here", 34343)
+p Space.all
