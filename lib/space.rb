@@ -23,11 +23,8 @@ class Space
     connect_db
     result = @connection.exec_params('INSERT INTO spaces (name, description, price)' \
     'VALUES ($1, $2, $3) RETURNING id ;', [name, description, price])
-    Space.new(result['id'], name, description, price)
-    end
+    Space.new(result[0]['id'], name, description, price)
   end
-
-
 
   def self.connect_db
     if ENV['ENVIRONMENT'] = 'test'
@@ -36,6 +33,5 @@ class Space
       @connection = PG.connect(dbname: 'makers_bnb')
     end
   end
-
 
 end
