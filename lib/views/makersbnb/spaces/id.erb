@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>A DIY BNB</title>
+  </head>
+  <body>
+  <h1><%= @space.name %> <%= @space.price %></h1>
+  <br>
+  <h3><%= @space.description %></h3>
+  <form action='/makersbnb/spaces/<%= @space.id %>' method='post'>
+    <input type='submit' value='Book the Space'>
+  </form>
+    </ul>
+  </body>
+</html>

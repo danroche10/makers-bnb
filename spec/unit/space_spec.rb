@@ -45,4 +45,14 @@ describe Space do
       expect { Space.book(1) }.to change { Space.booked?(1) }.from('f').to('t')
     end
   end
+
+  describe '#self.find' do
+    it 'find space by id' do
+      new_space = Space.create('space1', 'semi comfortable', 10000)
+      result = Space.find(new_space.id)
+      expect(result.name).to eq(new_space.name)
+      expect(result.description).to eq(new_space.description)
+      expect(result.price).to eq("#{new_space.price}")
+    end
+  end
 end

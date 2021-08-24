@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>A DIY BNB</title>
+  </head>
+  <body>
+  <h1>Book A Space </h1>
+  <form action='/makersbnb/spaces/new'>
+    <input type='submit' value='List a Space'>
+  </form>
+  <ul>
+    <% @space_list.each do |space| %>
+      <% if space.booked == 'f' %>
+      <li>
+        <a href='/makersbnb/spaces/<%= space.id %>'><%= space.name %></a>
+         <%= space.price %>
+         <br>
+        <%= space.description %>
+      </li>
+      <% end %>
+    <% end %>
+    </ul>
+  </body>
+</html>
