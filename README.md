@@ -78,8 +78,12 @@ the space should still be book-able unless a reservation has been approved
 
 ### Planning
 
-Screenshot 1 for jamboard
+```
 
-Screenshot 2 for jamboard
+![image](https://user-images.githubusercontent.com/64266350/130488277-8a72b91f-ea62-4feb-b4d5-bff4e77331f0.png)
 
-Screenshot 3 for jamboard
+![image](https://user-images.githubusercontent.com/64266350/130488320-4c30a2a8-1716-4eec-8844-05a2c1958f86.png)
+
+![image](https://user-images.githubusercontent.com/64266350/130488376-1a7b65ea-03d2-43bf-ad11-0da509cbf21c.png)
+
+
