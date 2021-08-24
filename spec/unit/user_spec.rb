@@ -1,6 +1,7 @@
 require 'user'
 
 describe User do
+
   describe '.create' do
     it 'creates new user' do
       user = described_class.create(email: 'test@test.com', password: 'test')
@@ -21,6 +22,27 @@ describe User do
       expect(result.email).to eq user.email
       expect(result.id).to eq user.id
       expect(result.password).to eq user.password
+    end
+  end
+
+  describe '.authenticate' do
+    it 'returns a user given a correct username and password, if one exists' do
+      user = described_class.create(email: 'test@test.com', password: 'test')
+      authenticated_user = described_class.authenticate(email: 'test@test.com', password: 'test')
+
+      expect(authenticated_user.id).to eq user.id
+    end
+
+    it 'returns nil given an incorrect email address' do
+      User.create(email: 'test@test.com', password: 'password123')
+
+      expect(User.authenticate(email: 'nottherightemail@me.com', password: 'password123')).to be_nil
+    end
+
+    it 'returns nil given an incorrect password' do
+      User.create(email: 'test@test.com', password: 'password123')
+      
+      expect(User.authenticate(email: 'test@test.com', password: 'wrongpassword')).to be_nil
     end
   end
 
