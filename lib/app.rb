@@ -26,9 +26,14 @@ class MakersBnB < Sinatra::Base
     redirect '/makersbnb/spaces'
   end
 
-  get '/makersbnb/space/:id' do
-    @space = Space.find(id: params[:id])
+  get '/makersbnb/spaces/:id' do
+    @space = Space.find(params[:id])
     erb(:'makersbnb/spaces/id')
+  end
+
+  post '/makersbnb/spaces/:id' do
+    Space.book(params[:id])
+    redirect '/makersbnb/spaces'
   end
 
   run! if app_file == $0

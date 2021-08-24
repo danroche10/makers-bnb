@@ -12,14 +12,10 @@
     <% @space_list.each do |space| %>
       <% if space.booked == 'f' %>
       <li>
-        <%= space.name %> <%= space.price %>
-        <br>
+        <a href='/makersbnb/spaces/<%= space.id %>'><%= space.name %></a>
+         <%= space.price %>
+         <br>
         <%= space.description %>
-        <br>
-        <form action='/makersbnb/spaces/<%= space.id %>'>
-        <input type='hidden' name='id' value=<%= space.id %>>
-        <input type='submit' value='See more'>
-        </form>
       </li>
       <% end %>
     <% end %>
