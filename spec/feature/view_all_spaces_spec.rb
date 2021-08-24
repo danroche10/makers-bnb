@@ -6,10 +6,8 @@ feature 'list all spaces' do
     expect(page).to have_content('very comfortable')
     expect(page).to have_content('100000')
   end
-end
 
-feature 'list all spaces' do
-  scenario 'as a logged in user I can see all available spaces' do
+  scenario "as a logged in user I can't see booked spaces" do
     add_test_spaces
     Space.book(1)
     visit('/makersbnb/spaces')

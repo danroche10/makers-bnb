@@ -7,5 +7,7 @@ feature 'view a space' do
     expect(page).to have_content('space1')
     expect(page).to have_content('semi comfortable')
     expect(page).to have_content('10000')
+    click_button('Book the Space')
+    expect(page).not_to have_content('space1')
   end
 end
