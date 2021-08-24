@@ -21,6 +21,17 @@ class User
     User.new(id: result[0]['id'], email: result[0]['email'], password: result[0]['password'])
   end
 
-
+  def self.find(id)
+    return nil unless id
+    if ENV['RACK_ENV'] == 'test'
+      con = PG.connect(dbname: 'makers_bnb_test')
+    else
+      con = PG.connect(dbname: 'makers_bnb')
+    end
+    result = con.exec(
+      "SELECT * FROM users WHERE id = $1", [id])
+      User.new(id: result[0]['id'], email: result[0]['email'], password: result[0]['password'])
+  
+  end
 
 end
