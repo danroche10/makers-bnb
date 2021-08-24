@@ -15,7 +15,7 @@ feature 'So a user can login' do
     fill_in('email', with: 'test@test.com')
     fill_in('password', with: 'test')
     click_button('Login')
-    expect(page).to have_content("Book a space")
+    expect(page).to have_content("Book A Space")
   end
 
   scenario 'user enters incorrect email' do
@@ -23,7 +23,7 @@ feature 'So a user can login' do
     fill_in('email', with: 'wrongemail@test.com')
     fill_in('password', with: 'test')
     click_button('Login')
-    expect(page).not_to have_content("Book a space")
+    expect(page).not_to have_content("Book A Space")
   end
 
   scenario 'user enters incorrect email' do
@@ -31,7 +31,7 @@ feature 'So a user can login' do
     fill_in('email', with: 'test@test.com' )
     fill_in('password', with: 'wrongpassword')
     click_button('Login')
-    expect(page).not_to have_content("Book a space")
+    expect(page).not_to have_content("Book A Space")
   end
   
 end

@@ -29,6 +29,6 @@ feature "user can sign up for makers bnb" do
     fill_in('password', with: 'test')
     fill_in('password_confirmation', with: 'test')
     click_button('Sign up')
-    expect(page).to have_content "Book a space"
+    expect(page).to have_content "Book A Space"
   end
 end

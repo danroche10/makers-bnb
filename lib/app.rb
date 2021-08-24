@@ -43,7 +43,7 @@ class MakersBnB < Sinatra::Base
 
   post '/register' do
     User.create(email: params[:email], password: params[:password])
-    redirect '/spaces'
+    redirect '/makersbnb/spaces'
   end
 
   get '/login' do
@@ -54,7 +54,7 @@ class MakersBnB < Sinatra::Base
     user = User.authenticate(email: params[:email], password: params[:password])
     if user
       session[:user_id] = user.id
-      redirect('/spaces')
+      redirect('/makersbnb/spaces')
     else
       redirect('/login')
     end 
