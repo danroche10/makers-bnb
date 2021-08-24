@@ -21,10 +21,23 @@ class MakersBnB < Sinatra::Base
     redirect '/spaces'
   end
 
-  get '/sessions/new' do
-    erb :makersbnb/sessions/new
+  get '/login' do
+    erb :'makersbnb/sessions/new'
   end
 
+  post '/login' do
+    user = User.authenticate(email: params[:email], password: params[:password])
+    if user
+      session[:user_id] = user.id
+      redirect('/spaces')
+    else
+      redirect('/login')
+    end 
+  end
+
+  get '/spaces' do
+    "Book a space" 
+  end
 
   run! if app_file == $0
 end
