@@ -36,7 +36,7 @@ class User
   end
 
   def self.connect_db
-    if ENV['ENVIRONMENT'] = 'test'
+    if ENV['ENVIRONMENT'] == 'test'
       @con = PG.connect(dbname: 'makers_bnb_test')
     else
       @con = PG.connect(dbname: 'makers_bnb')
