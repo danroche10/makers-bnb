@@ -32,9 +32,17 @@ describe Space do
     end
   end
 
+  describe '#self.booked?' do
+    it 'returns booked status' do
+      add_test_spaces
+      expect(Space.booked?(1)).to eq('f')
+    end
+  end
+
   describe '#self.book' do
     it 'changes booked from false to true when space is booked' do
-      
+      add_test_spaces
+      expect { Space.book(1) }.to change { Space.booked?(1) }.from('f').to('t')
     end
   end
 end
