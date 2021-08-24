@@ -79,8 +79,6 @@ the space should still be book-able unless a reservation has been approved
 ### Planning
 
 ```
-Working Practices: https://docs.google.com/spreadsheets/d/1TkgIklQYokmHeOuULLJSj9e7a4EJAbe3V26Z-od4sQo/edit#gid=0
-```
 
 ![image](https://user-images.githubusercontent.com/64266350/130488277-8a72b91f-ea62-4feb-b4d5-bff4e77331f0.png)
 
