@@ -87,6 +87,8 @@ GEM
       nokogiri (~> 1.8)
 
 PLATFORMS
+  ruby
+  x86_64-darwin-18
   x86_64-darwin-19
 
 DEPENDENCIES
@@ -101,4 +103,4 @@ DEPENDENCIES
   webrick
 
 BUNDLED WITH
-   2.2.24
+   2.2.26
