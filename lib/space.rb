@@ -45,6 +45,3 @@ class Space
     end
   end
 end
-
-p Space.create("name1", "description here", 34343)
-p Space.all

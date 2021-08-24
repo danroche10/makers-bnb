@@ -17,5 +17,14 @@ class MakersBnB < Sinatra::Base
     erb(:'makersbnb/spaces')
   end
 
+  get '/makersbnb/spaces/new' do
+    erb(:'makersbnb/spaces/new')
+  end
+
+  post '/makersbnb/spaces/new' do
+    Space.create(params[:name], params[:description], params[:price])
+    redirect '/makersbnb/spaces'
+  end
+
   run! if app_file == $0
 end
