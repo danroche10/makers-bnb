@@ -16,14 +16,15 @@ class MakersBnB < Sinatra::Base
     erb :about
   end
 
-  post '/spaces' do
+  post '/register' do
     User.create(email: params[:email], password: params[:password])
     redirect '/spaces'
   end
 
-  get '/spaces' do
-    "Book a space"
+  get '/sessions/new' do
+    erb :makersbnb/sessions/new
   end
+
 
   run! if app_file == $0
 end
