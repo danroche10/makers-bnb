@@ -10,9 +10,12 @@
   </form>
   <ul>
     <% @space_list.each do |space| %>
+      <% if space.booked == 'f' %>
       <li>
-        <%= space.name %> <%= space.price %><br>
+        <a href='/makersbnb/spaces/<%= space.id %>'><%= space.name %> <%= space.price %><br></a>
         <%= space.description %>
+      </li>
+      <% end %>
     <% end %>
     </ul>
   </body>
