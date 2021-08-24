@@ -34,7 +34,13 @@ class Space
 
   def self.book(id)
     connect_db
-    result = @connection.exec("UPDATE spaces SET booked = TRUE WHERE id = #{id}")
+    @connection.exec("UPDATE spaces SET booked = TRUE WHERE id = #{id}")
+  end
+
+  def self.find(id:)
+    connect_db
+    result = @connection.exec("SELECT * FROM spaces WHERE id = $1", [id])
+    Space.new(result[0]['id'], result[0]['name'], result[0]['description'], result[0]['price'])
   end
 
   def self.connect_db
