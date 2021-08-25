@@ -8,6 +8,11 @@
   <form action='/makersbnb/spaces/new'>
     <input type='submit' value='List a Space'>
   </form>
+  <form action='/makersbnb/spaces' method='post'>
+    <input type='date' placeholder='Available From (dd-mm-yyyy)' name='start_date'>
+    <input type='date' placeholder='Available To (dd-mm-yyyy)' name='end_date'>
+    <input type='submit' value='Filter Spaces by Date'>
+  </form>
   <ul>
     <% @space_list.each do |space| %>
       <% if space.booked == 'f' %>

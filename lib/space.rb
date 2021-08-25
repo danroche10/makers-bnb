@@ -19,6 +19,10 @@ class Space
     end
   end
 
+  def date_fiter(start_date, end_date)
+    all
+  end
+
   def self.create(name, description, price)
     connect_db
     result = @connection.exec_params('INSERT INTO spaces (name, description, price)' \

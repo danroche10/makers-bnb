@@ -18,6 +18,12 @@ class MakersBnB < Sinatra::Base
     erb(:'makersbnb/spaces')
   end
 
+  post '/makersbnb/spaces' do
+    session[:start_date] = params[:start_date]
+    session[:end_date] = params[:end_date]
+    redirect('/makersbnb/spaces')
+  end
+
   get '/makersbnb/spaces/new' do
     erb(:'makersbnb/spaces/new')
   end
