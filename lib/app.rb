@@ -11,10 +11,12 @@ class MakersBnB < Sinatra::Base
 
   enable :sessions
 
-
   get '/makersbnb' do
     @user = User.find(session[:user_id]) unless session[:user_id].nil?
-   erb :index
+    if @user
+      redirect '/makersbnb/spaces'
+    end
+    erb :index
   end
   
   post '/makersbnb' do
@@ -24,11 +26,13 @@ class MakersBnB < Sinatra::Base
   end
 
   get '/makersbnb/spaces' do
+    @user = User.find(session[:user_id]) unless session[:user_id].nil?
     @space_list = Space.all
     erb(:'makersbnb/spaces')
   end
 
   get '/makersbnb/spaces/new' do
+    @user = User.find(session[:user_id]) unless session[:user_id].nil?
     erb(:'makersbnb/spaces/new')
   end
 
@@ -38,6 +42,7 @@ class MakersBnB < Sinatra::Base
   end
 
   get '/makersbnb/spaces/:id' do
+    @user = User.find(session[:user_id]) unless session[:user_id].nil?
     @space = Space.find(params[:id])
     erb(:'makersbnb/spaces/id')
   end
@@ -48,10 +53,15 @@ class MakersBnB < Sinatra::Base
   end
 
   get '/makersbnb/about' do
+    @user = User.find(session[:user_id]) unless session[:user_id].nil?
     erb :'makersbnb/about'
   end
 
   get '/makersbnb/login' do
+    @user = User.find(session[:user_id]) unless session[:user_id].nil?
+    if @user
+      redirect '/makersbnb/spaces'
+    end
     erb :'makersbnb/sessions/new'
   end
 
@@ -63,6 +73,11 @@ class MakersBnB < Sinatra::Base
     else
       redirect('/makersbnb/login')
     end 
+  end
+
+  post '/makersbnb/sessions/destroy' do
+    session.clear
+    redirect('/makersbnb')
   end
   
   run! if app_file == $0
