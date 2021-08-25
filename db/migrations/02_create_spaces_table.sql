@@ -1,1 +1,1 @@
-CREATE TABLE spaces(id SERIAL PRIMARY KEY, name VARCHAR(200), description VARCHAR(600), price integer, user_id integer REFERENCES users(id), booked BOOLEAN DEFAULT FALSE);
+CREATE TABLE spaces(id SERIAL PRIMARY KEY, name VARCHAR(200), description VARCHAR(600), price integer, user_id integer REFERENCES users(id));

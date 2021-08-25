@@ -81,6 +81,7 @@ class MakersBnB < Sinatra::Base
     end 
   end
 
+  # change to log out
   post '/makersbnb/sessions/destroy' do
     session.clear
     redirect('/makersbnb')

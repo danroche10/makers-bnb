@@ -4,6 +4,10 @@ def add_test_spaces
   Space.create('space3', 'uncomfortable', 100000)
 end
 
-def add_test_spaces
+def add_test_users
+  # need to fill
+ end
+
+def add_test_requests
  # need to use add request method
 end

@@ -22,6 +22,7 @@ class Request
 
   def self.all(user_id)
     connect_db
+    # add WHERE constraint
     @con.exec('SELECT * FROM requests').map do |request|
       Request.new(id: request['id'], start_date: request['start_date'], end_date: request['end_date'],
       user_id: request['user_id'], space_id: request['space_id'], approval_status: request['approval_status'])
