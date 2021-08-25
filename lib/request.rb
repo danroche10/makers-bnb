@@ -4,7 +4,7 @@ class Request
 
   attr_reader :id, :start_date, :end_date, :user_id, :space_id, :approval_status
 
-  def initialize(id:, start_date:, end_date:, user_id:, space_id:, approval_status = null)
+  def initialize(id:, start_date:, end_date:, user_id:, space_id:, approval_status:)
     @id = id
     @start_date = start_date
     @end_date = end_date
@@ -22,11 +22,11 @@ class Request
   #   end
   # end
 
-  def self.create(start_date:, end_date:, user_id:, space_id:)
+  def self.create(start_date:, end_date:, user_id:, space_id:, approval_status:)
     connect_db
       result = @con.exec(
-        "INSERT INTO users (start_date, end_date, user_id, space_id) VALUES ($1, $2, $3, $4) RETURNING id, start_date, end_date, user_id, space_id;", [start_date, end_date, user_id, space_id])
-      Request.new(id: result[0]['id'], start_date: result[0]['start_date'], end_date: result[0]['end_date'], user_id: result[0]['user_id'], space_id: result[0]['space_id'])    
+        "INSERT INTO requests (start_date, end_date, user_id, space_id, approval_status) VALUES ($1, $2, $3, $4, $5) RETURNING id, start_date, end_date, user_id, space_id, approval_status;", [start_date, end_date, user_id, space_id, approval_status])
+      Request.new(id: result[0]['id'], start_date: result[0]['start_date'], end_date: result[0]['end_date'], user_id: result[0]['user_id'], space_id: result[0]['space_id'], approval_status: result[0]['approval_status'])    
   end
 
 
