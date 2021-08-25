@@ -37,20 +37,20 @@ class MakersBnB < Sinatra::Base
     redirect '/makersbnb/spaces'
   end
 
-  get '/about' do
-    erb :about
+  get '/makersbnb/about' do
+    erb :'makersbnb/about'
   end
 
-  post '/register' do
+  post '/makersbnb/register' do
     User.create(email: params[:email], password: params[:password])
     redirect '/makersbnb/spaces'
   end
 
-  get '/login' do
+  get '/makersbnb/login' do
     erb :'makersbnb/sessions/new'
   end
 
-  post '/login' do
+  post '/makersbnb/login' do
     user = User.authenticate(email: params[:email], password: params[:password])
     if user
       session[:user_id] = user.id
