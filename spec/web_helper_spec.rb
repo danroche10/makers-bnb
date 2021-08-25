@@ -3,3 +3,9 @@ def new_user_login
   visit '/makersbnb'
   click_button('Login')
 end
+
+def log_in_details
+  fill_in('email', with: 'test@test.com')
+  fill_in('password', with: 'test')
+  click_button('Login')
+end
