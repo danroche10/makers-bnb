@@ -22,20 +22,24 @@
     <% if @space_filtered.nil? %>
       <% @space_list.each do |space| %>
         <li>
-          <a href='/makersbnb/spaces/<%= space.id %>'><%= space.name %></a>
-          <%= space.price %>
+          Name: <a href='/makersbnb/spaces/<%= space.id %>'><%= space.name %></a>
           <br>
-          <%= space.description %>
+          Price: <%= space.price %>
+          <br>
+          Description: <%= space.description %>
         </li>
+        <br>
       <% end %>
     <% else %>
       <% @space_filtered.each do |space| %>
         <li>
-          <a href='/makersbnb/spaces/<%= space.id %>'><%= space.name %></a>
-          <%= space.price %>
+          Name: <a href='/makersbnb/spaces/<%= space.id %>'><%= space.name %></a>
           <br>
-          <%= space.description %>
+          Price: <%= space.price %>
+          <br>
+          Description: <%= space.description %>
         </li>
+        <br>
       <% end %>
     <% end %>
     </ul>
