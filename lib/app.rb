@@ -9,8 +9,18 @@ class MakersBnB < Sinatra::Base
     register Sinatra::Reloader
   end
 
+  enable :sessions
+
+
   get '/makersbnb' do
+    @user = User.find(session[:user_id]) unless session[:user_id].nil?
    erb :index
+  end
+  
+  post '/makersbnb' do
+    new_user = User.create(email: params[:email], password: params[:password])
+    session[:user_id] = new_user.id
+    redirect '/makersbnb/spaces'
   end
 
   get '/makersbnb/spaces' do
@@ -41,22 +51,17 @@ class MakersBnB < Sinatra::Base
     erb :'makersbnb/about'
   end
 
-  post '/makersbnb/register' do
-    User.create(email: params[:email], password: params[:password])
-    redirect '/makersbnb/spaces'
-  end
-
   get '/makersbnb/login' do
     erb :'makersbnb/sessions/new'
   end
 
   post '/makersbnb/login' do
-    user = User.authenticate(email: params[:email], password: params[:password])
-    if user
-      session[:user_id] = user.id
+    authenticated_user = User.authenticate(email: params[:email], password: params[:password])
+    if authenticated_user
+      session[:user_id] = authenticated_user.id
       redirect('/makersbnb/spaces')
     else
-      redirect('/login')
+      redirect('/makersbnb/login')
     end 
   end
   
