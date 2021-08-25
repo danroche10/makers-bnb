@@ -20,14 +20,10 @@ class Space
   end
 
   def self.filter(start_date, end_date)
-    #unbooked = all.select { |space| @connection.exec("SELECT * FROM requests WHERE space_id=#{space.id} AND approval_status=null OR approval_status=false") }
-    booked_but_available = all.select { |space| @connection.exec("SELECT * FROM requests WHERE space_id=#{space.id} AND approval_status=true AND start_date NOT BETWEEN '#{start_date}' AND '#{end_date}' AND end_date NOT BETWEEN '#{start_date}' AND '#{end_date}'") }
-    p booked_but_available.count
-    #{start_date} < start_date < #{end_date})
-    # get spaceid
-    # check requests table with spaceid
-    # compare start date/end date/approval status
-    # select only ones that have requirements
+    connect_db
+    booked = @connection.exec("SELECT * FROM requests WHERE approval_status=true AND start_date BETWEEN '#{start_date}' AND '#{end_date}' OR approval_status=true AND end_date BETWEEN '#{start_date}' AND '#{end_date}'")
+    booked_array = booked.map do |space| space['space_id'] end
+    all.delete_if { |space| booked_array.include?(space.id) }
   end
 
   def self.create(name, description, price)
@@ -63,4 +59,4 @@ class Space
   end
 end
 
-p Space.filter("2022-03-10", "2022-04-10")
+p Space.filter("2021-08-25", "2021-10-01")
