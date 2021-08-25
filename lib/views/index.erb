@@ -4,13 +4,18 @@
 <title>Makersbnb!</title>
 </head>
 <body>
+<% if @user %>
+<h4> Welcome <%= @user.email%></h4>
+<% else %>
 <form action="/makersbnb/login" method="get">
   <input type="submit" value="Login">
 </form>
+<% end %>
 <a href="/makersbnb/about" >About</a>
 <h1>Welcome to Makersbnb!</h1>
 <h3>Feel at home with us!</h3>
-<form action="/makersbnb/register" method="POST">
+<% if !@user %>
+<form action="/makersbnb" method="POST">
   <input type="email" placeholder="enter your e-mail" name="email" >
   <br></br>
   <input type="password" placeholder="password" name="password">
@@ -19,6 +24,7 @@
   <br></br>
   <input type="submit" value="Sign up">
 </form>
+<% end %>
 </body>
 </html>
 
