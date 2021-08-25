@@ -41,7 +41,7 @@ class MakersBnB < Sinatra::Base
     erb :'makersbnb/about'
   end
 
-  post '/makersbnb/register' do
+  post '/makersbnb' do
     User.create(email: params[:email], password: params[:password])
     redirect '/makersbnb/spaces'
   end
