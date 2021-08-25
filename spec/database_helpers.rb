@@ -3,3 +3,7 @@ def add_test_spaces
   Space.create('space2', 'very comfortable', 10)
   Space.create('space3', 'uncomfortable', 100000)
 end
+
+def add_test_spaces
+ # need to use add request method
+end

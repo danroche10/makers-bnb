@@ -2,12 +2,12 @@ require 'space'
 
 describe Space do
 
-  let(:space) { described_class.new(1, "space1", "semi comfortable", 10000, false) }
+  let(:space) { described_class.new(1, "space1", "semi comfortable", 10000) }
   let(:spaces) { Space.all }
 
   describe '#initialize' do
-    it 'initializes with a name, description, price and booking status' do
-      expect(space).to have_attributes(id: 1, name: "space1", description: "semi comfortable", price: 10000, booked: false)
+    it 'initializes with a name, description and price' do
+      expect(space).to have_attributes(id: 1, name: "space1", description: "semi comfortable", price: 10000)
     end
   end
 
@@ -29,20 +29,6 @@ describe Space do
       expect(new_space.name).to eq('space1')
       expect(new_space.description).to eq('semi comfortable')
       expect(new_space.price).to eq(10000)
-    end
-  end
-
-  describe '#self.booked?' do
-    it 'returns booked status' do
-      add_test_spaces
-      expect(Space.booked?(1)).to eq('f')
-    end
-  end
-
-  describe '#self.book' do
-    it 'changes booked from false to true when space is booked' do
-      add_test_spaces
-      expect { Space.book(1) }.to change { Space.booked?(1) }.from('f').to('t')
     end
   end
 
