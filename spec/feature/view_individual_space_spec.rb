@@ -1,5 +1,5 @@
 feature 'view a space' do
-  scenario 'click on individual space' do
+  xscenario 'click on individual space' do
     add_test_spaces
     visit ('/makersbnb/spaces')
     click_link('space1')

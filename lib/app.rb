@@ -32,6 +32,7 @@ class MakersBnB < Sinatra::Base
 
   get '/makersbnb/spaces' do
     @user = User.find(session[:user_id]) unless session[:user_id].nil?
+    @space_filtered = Space.filter(params[:start_date], params[:end_date])
     @space_list = Space.all
     erb(:'makersbnb/spaces')
   end
@@ -53,7 +54,7 @@ class MakersBnB < Sinatra::Base
   end
 
   post '/makersbnb/spaces/:id' do
-    Space.book(params[:id])
+    # Space.book(params[:id])
     redirect '/makersbnb/spaces'
   end
 
