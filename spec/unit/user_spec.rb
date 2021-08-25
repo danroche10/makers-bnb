@@ -3,6 +3,7 @@ require 'user'
 describe User do
 
   let(:user) { described_class.create(email: 'test@test.com', password: 'test') }
+  let(:result) { described_class.find(user.id) }
 
 
   describe '#initialize' do
@@ -25,7 +26,6 @@ describe User do
     end
     
     it 'finds user by id' do
-      result = described_class.find(user.id)
       expect(result.email).to eq user.email
       expect(result.id).to eq user.id
       expect(result.password).to eq user.password
@@ -36,7 +36,6 @@ describe User do
     it 'returns a user given a correct username and password, if one exists' do
       user = described_class.create(email: 'test@test.com', password: 'test')
       authenticated_user = described_class.authenticate(email: 'test@test.com', password: 'test')
-
       expect(authenticated_user.id).to eq user.id
     end
 

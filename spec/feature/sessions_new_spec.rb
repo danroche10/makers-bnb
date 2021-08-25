@@ -12,9 +12,7 @@ feature 'So a user can login' do
 
   scenario 'user enters correct details' do
     new_user_login
-    fill_in('email', with: 'test@test.com')
-    fill_in('password', with: 'test')
-    click_button('Login')
+    log_in_details
     expect(page).to have_content("Book A Space")
   end
 
@@ -32,6 +30,23 @@ feature 'So a user can login' do
     fill_in('password', with: 'wrongpassword')
     click_button('Login')
     expect(page).not_to have_content("Book A Space")
-  end
-  
+  end  
 end
+
+feature "once logged in, user should be able to log out" do
+  scenario "by clicking on the sign out button" do
+    new_user_login
+    log_in_details
+    expect(page).to have_button("Sign out")
+    click_button('Sign out')
+    expect(page).to have_button 'Login'
+  end
+    scenario "if logged in, the about us page should allow to sign out" do
+      new_user_login
+      log_in_details
+      expect(page).to have_button("Sign out")
+      click_button('Sign out')
+      expect(page).to have_button 'Login'
+    end
+end
+

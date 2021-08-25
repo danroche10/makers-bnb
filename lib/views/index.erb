@@ -2,16 +2,19 @@
 <html>
 <head>
 <title>Makersbnb!</title>
-</head>
-<body>
 <% if @user %>
-<h4> Welcome <%= @user.email%></h4>
+<h4> Logged in as <%= @user.email%></h4>
+<form action="/makersbnb/sessions/destroy" method="POST">
+  <input type="submit" value="Sign out">
+</form>
 <% else %>
 <form action="/makersbnb/login" method="get">
   <input type="submit" value="Login">
 </form>
 <% end %>
 <a href="/makersbnb/about" >About</a>
+</head>
+<body>
 <h1>Welcome to Makersbnb!</h1>
 <h3>Feel at home with us!</h3>
 <% if !@user %>
