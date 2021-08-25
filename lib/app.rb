@@ -14,11 +14,13 @@ class MakersBnB < Sinatra::Base
   end
 
   get '/makersbnb/spaces' do
+    @space_filtered = Space.filter(session[:start_date], session[:end_date])
     @space_list = Space.all
     erb(:'makersbnb/spaces')
   end
 
   post '/makersbnb/spaces' do
+    p params
     session[:start_date] = params[:start_date]
     session[:end_date] = params[:end_date]
     redirect('/makersbnb/spaces')

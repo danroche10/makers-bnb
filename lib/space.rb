@@ -20,8 +20,10 @@ class Space
   end
 
   def self.filter(start_date, end_date)
+    return nil if start_date == nil || end_date == nil
     connect_db
-    booked = @connection.exec("SELECT * FROM requests WHERE approval_status=true AND start_date BETWEEN '#{start_date}' AND '#{end_date}' OR approval_status=true AND end_date BETWEEN '#{start_date}' AND '#{end_date}'")
+    booked = @connection.exec("SELECT * FROM requests WHERE approval_status=true AND start_date BETWEEN' \ 
+    ''#{start_date}' AND '#{end_date}' OR approval_status=true AND end_date BETWEEN '#{start_date}' AND '#{end_date}'")
     booked_array = booked.map do |space| space['space_id'] end
     all.delete_if { |space| booked_array.include?(space.id) }
   end
@@ -58,5 +60,3 @@ class Space
     end
   end
 end
-
-p Space.filter("2021-08-25", "2021-10-01")

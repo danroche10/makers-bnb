@@ -9,19 +9,32 @@
     <input type='submit' value='List a Space'>
   </form>
   <form action='/makersbnb/spaces' method='post'>
-    <input type='date' placeholder='Available From (dd-mm-yyyy)' name='start_date'>
-    <input type='date' placeholder='Available To (dd-mm-yyyy)' name='end_date'>
+    <input type='date' placeholder='Available From (dd-mm-yyyy)' value"" name='start_date'>
+    <input type='date' placeholder='Available To (dd-mm-yyyy)' value"" name='end_date'>
     <input type='submit' value='Filter Spaces by Date'>
   </form>
   <ul>
-    <% @space_list.each do |space| %>
-      <% if space.booked == 'f' %>
-      <li>
-        <a href='/makersbnb/spaces/<%= space.id %>'><%= space.name %></a>
-         <%= space.price %>
-         <br>
-        <%= space.description %>
-      </li>
+    <% if @space_filtered.nil? %>
+      <% @space_list.each do |space| %>
+
+        <li>
+          <a href='/makersbnb/spaces/<%= space.id %>'><%= space.name %></a>
+          <%= space.price %>
+          <br>
+          <%= space.description %>
+        </li>
+
+      <% end %>
+    <% else %>
+      <% @space_filtered.each do |space| %>
+
+        <li>
+          <a href='/makersbnb/spaces/<%= space.id %>'><%= space.name %></a>
+          <%= space.price %>
+          <br>
+          <%= space.description %>
+        </li>
+
       <% end %>
     <% end %>
     </ul>
