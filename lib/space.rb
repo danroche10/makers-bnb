@@ -20,7 +20,15 @@ class Space
   end
 
   def date_fiter(start_date, end_date)
-    all
+    all.select { |space| "SELECT * FROM requests WHERE space_id=1 AND approval_status=null OR approval_status=false" }
+
+    all.select { |space| "SELECT * FROM requests WHERE space_id=1 AND approval_status=true AND start_date NOT BETWEEN #{start_date} AND #{end_date} AND end_date NOT BETWEEN #{start_date} AND #{end_date}" }
+
+    !(#{start_date} < start_date < #{end_date})
+    # get spaceid
+    # check requests table with spaceid
+    # compare start date/end date/approval status
+    # select only ones that have requirements
   end
 
   def self.create(name, description, price)
