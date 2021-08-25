@@ -13,15 +13,6 @@ class Request
     @approval_status = approval_status
   end
 
-  # def self.all(user_id)
-  #   return nil unless id
-  #   connect_db
-  #   result = @con.exec("SELECT * FROM requests WHERE user_id = $1", [user_id]).map do |request|
-  #     User.new(id: request[0]['id'], start_date: request[0]['start_date'], end_date: request[0]['end_date'], 
-  #     user_id: request[0]['user_id'], request[0]['space_id'], request[0]['approval_status'])
-  #   end
-  # end
-
   def self.create(start_date:, end_date:, user_id:, space_id:, approval_status:)
     connect_db
       result = @con.exec(
@@ -29,7 +20,13 @@ class Request
       Request.new(id: result[0]['id'], start_date: result[0]['start_date'], end_date: result[0]['end_date'], user_id: result[0]['user_id'], space_id: result[0]['space_id'], approval_status: result[0]['approval_status'])    
   end
 
-
+  def self.all(user_id)
+    connect_db
+    @con.exec('SELECT * FROM requests').map do |request|
+      Request.new(id: request['id'], start_date: request['start_date'], end_date: request['end_date'],
+      user_id: request['user_id'], space_id: request['space_id'], approval_status: request['approval_status'])
+    end
+  end
 
   def self.connect_db
     if ENV['ENVIRONMENT'] == 'test'

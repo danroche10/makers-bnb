@@ -3,6 +3,7 @@ require 'sinatra/base'
 require 'sinatra/reloader'
 require_relative 'space'
 require './lib/user'
+require './lib/request'
 
 class MakersBnB < Sinatra::Base
   configure :development do
@@ -82,6 +83,13 @@ class MakersBnB < Sinatra::Base
   post '/makersbnb/sessions/destroy' do
     session.clear
     redirect('/makersbnb')
+  end
+
+  get '/makersbnb/requests' do
+    @user = User.find(session[:user_id]) unless session[:user_id].nil?
+    user_id = @user.id
+    @requests = Request.all(user_id)
+    erb :'makersbnb/requests'
   end
   
   run! if app_file == $0
