@@ -43,6 +43,7 @@ class MakersBnB < Sinatra::Base
     @user = User.find(session[:user_id]) unless session[:user_id].nil?
     @space_filtered = Space.filter(params[:start_date], params[:end_date])
     @space_list = Space.all
+    session[:availability] = nil
     erb(:'makersbnb/spaces')
   end
 
@@ -65,7 +66,7 @@ class MakersBnB < Sinatra::Base
 
   post '/makersbnb/spaces/:id' do
     session[:request] = nil
-    session[:availability] = nil
+    # session[:availability] = nil
     session[:availability] = Space.check_availability(params[:start_date], params[:end_date], params[:space_id])
     session[:request] = Request.new(id: 1, start_date: params[:start_date], end_date: params[:end_date], user_id: session[:user_id], space_id: params[:space_id], approval_status: nil)
     redirect back
@@ -112,6 +113,7 @@ class MakersBnB < Sinatra::Base
 
   post '/makersbnb/requests' do
     session[:confirmed_request] = session[:request]
+    session[:availability] = nil
     redirect('/makersbnb/requests')
   end
   

@@ -43,7 +43,7 @@ class Space
 
   def self.check_availability(start_date, end_date, space_id)
     connect_db
-    booked = @connection.exec("SELECT * FROM requests WHERE space_id='#{space_id}' AND approval_status=true AND start_date BETWEEN '#{start_date}' AND '#{end_date}' OR space_id='#{space_id}' AND approval_status=true AND end_date BETWEEN '#{start_date}' AND '#{start_date}' OR space_id='#{space_id.to_i}' AND approval_status=true AND start_date < '#{start_date}' AND end_date > '#{end_date}'")
+    booked = @connection.exec("SELECT * FROM requests WHERE space_id='#{space_id.to_i}' AND approval_status=true AND start_date BETWEEN '#{start_date}' AND '#{end_date}' OR space_id='#{space_id.to_i}' AND approval_status=true AND end_date BETWEEN '#{start_date}' AND '#{end_date}' OR space_id='#{space_id.to_i}' AND approval_status=true AND start_date < '#{start_date}' AND end_date > '#{end_date}'")
     booked.ntuples.zero? ? true : false
   end
 
