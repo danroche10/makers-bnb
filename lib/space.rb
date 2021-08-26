@@ -27,6 +27,7 @@ class Space
     all.delete_if { |space| booked_array.include?(space.id) }
   end
 
+  # add user_id as an argument
   def self.create(name, description, price)
     connect_db
     result = @connection.exec_params('INSERT INTO spaces (name, description, price)' \
