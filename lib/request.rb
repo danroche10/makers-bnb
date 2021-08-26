@@ -13,6 +13,14 @@ class Request
     @approval_status = approval_status
   end
 
+  def update_booking_request(response)
+    if response == "Accept" 
+      @approval_status = true
+    else
+      @approval_status = false
+    end
+  end
+
   def self.create(start_date:, end_date:, user_id:, space_id:, approval_status:)
     connect_db
       result = @con.exec(
@@ -22,10 +30,22 @@ class Request
 
   def self.all(user_id)
     connect_db
-    # add WHERE constraint
     @con.exec("SELECT * FROM requests WHERE user_id = $1", [user_id]).map do |request|
       Request.new(id: request['id'], start_date: request['start_date'], end_date: request['end_date'],
       user_id: request['user_id'], space_id: request['space_id'], approval_status: request['approval_status'])
+    end
+  end
+  
+  def self.all_joined
+    connect_db
+    result = @con.exec("SELECT requests.id, requests.start_date, requests.end_date, requests.user_id AS guest_id, requests.space_id, requests.approval_status,users.email, spaces.name, spaces.user_id AS host_id, spaces.description, spaces.price 
+    FROM requests
+    INNER JOIN users ON requests.user_id=users.id
+    INNER JOIN spaces ON requests.space_id=spaces.id;")
+    test = result.map do |request|
+      {"id": request['id'], "start_date": request['start_date'], "end_date": request['end_date'], "guest_user_id": request["guest_id"],
+      "space_id": request['space_id'], "approval_status": request['approval_status'], "email": request['email'], "space_name": request["name"],
+      "host_user_id": request["host_id"], "description": request["description"], "price": request["price"]}
     end
   end
 

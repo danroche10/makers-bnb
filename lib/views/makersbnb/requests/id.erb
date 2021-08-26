@@ -1,0 +1,16 @@
+
+
+My booking:
+<li>start date:<%= @host_request[:start_date] %></li>
+<li>end date:<%= @host_request[:start_date] %></li>
+<li>Guest: <%= @host_request[:email] %></li>
+
+<form action="/makersbnb/requests/<%= @host_request[:id] %>" id="form_response" method="POST">
+  <input type="submit" value="Accept">
+  <input type="hidden" value="Accept">
+</form>
+
+<form action="/makersbnb/requests/<%= @host_request[:id] %>" id="form_response" method="POST">
+  <input type="submit" value="Decline">
+  <input type="hidden" value="Decline">
+</form>
