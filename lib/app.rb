@@ -64,8 +64,10 @@ class MakersBnB < Sinatra::Base
   end
 
   post '/makersbnb/spaces/:id' do
+    session[:request] = nil
     session[:availability] = nil
     session[:availability] = Space.check_availability(params[:start_date], params[:end_date], params[:space_id])
+    session[:request] = Request.new(id: 1, start_date: params[:start_date], end_date: params[:end_date], user_id: session[:user_id], space_id: params[:space_id], approval_status: nil)
     redirect back
   end
 
@@ -99,10 +101,18 @@ class MakersBnB < Sinatra::Base
   end
 
   get '/makersbnb/requests' do
+    @request_info = session[:confirmed_request]
+    Request.create(start_date: @request_info.start_date, end_date: @request_info.end_date, user_id: @request_info.user_id, space_id: @request_info.space_id, approval_status: nil) unless @request_info.nil?
+    session[:confirmed_request] = nil
     @user = User.find(session[:user_id]) unless session[:user_id].nil?
     user_id = @user.id
     @requests = Request.all(user_id)
     erb :'makersbnb/requests'
+  end
+
+  post '/makersbnb/requests' do
+    session[:confirmed_request] = session[:request]
+    redirect('/makersbnb/requests')
   end
   
   run! if app_file == $0

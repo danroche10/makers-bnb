@@ -23,9 +23,11 @@
     <input type='hidden' name='space_id' value=<%= @space.id %>>
     <input type='submit' value='Check availability'>
   </form>
+  <br>
+  <br>
   <% if @availability == true %>
     Space is available! Go ahead and make a request.
-    <form action='/makersbnb/spaces/<%= @space.id %>' method='post'>
+    <form action='/makersbnb/requests' method='post'><br>
       <input type='submit' value='Request the Space'>
     </form>
   <% elsif @availability == false %>
