@@ -20,6 +20,7 @@
   <form action='/makersbnb/spaces/<%= @space.id %>' method='POST'>
     <input type='date' placeholder='Available From (dd-mm-yyyy)' value"" name='start_date' required>
     <input type='date' placeholder='Available To (dd-mm-yyyy)' value"" name='end_date' required>
+    <input type='hidden' name='space_id' value=<%= @space.id %>>
     <input type='submit' value='Check availability'>
   </form>
   <% if @availability == true %>
