@@ -49,5 +49,3 @@ class Request
     end
   end
 end
-
-Request.all_joined

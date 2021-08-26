@@ -14,9 +14,14 @@
   </head>
   <br></br>
   <body>
-    <% @requests.each do |request| %>
-      <li><%= request.id %></li>
+  <h5>requests for bookings</h5>
+    <% @guest_requests.each do |request| %>
+      <button><%= request[:start_date] %></button>
     <% end %>
-   
+   <br></br>
+   <h5>requests for property</h5>
+    <% @host_requests.each do |requests| %>
+      <li><%= requests[:start_date] %></li>
+    <% end %>
   </body>
 </html>

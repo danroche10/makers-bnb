@@ -100,7 +100,9 @@ class MakersBnB < Sinatra::Base
   get '/makersbnb/requests' do
     @user = User.find(session[:user_id]) unless session[:user_id].nil?
     user_id = @user.id
-    @requests = Request.all(user_id)
+    @requests = Request.all_joined
+    @guest_requests = Request.all_joined.select{|request| request[:guest_user_id] == user_id}
+    @host_requests = Request.all_joined.select{|request| request[:host_user_id] == user_id}
     erb :'makersbnb/requests'
   end
   
