@@ -107,7 +107,9 @@ class MakersBnB < Sinatra::Base
     session[:confirmed_request] = nil
     @user = User.find(session[:user_id]) unless session[:user_id].nil?
     user_id = @user.id
-    @requests = Request.all(user_id)
+    @requests = Request.all_joined
+    @guest_requests = Request.all_joined.select{|request| request[:guest_user_id] == user_id}
+    @host_requests = Request.all_joined.select{|request| request[:host_user_id] == user_id}
     erb :'makersbnb/requests'
   end
 
@@ -116,6 +118,23 @@ class MakersBnB < Sinatra::Base
     session[:availability] = nil
     redirect('/makersbnb/requests')
   end
+
+  get '/makersbnb/requests/:id' do
+    @host_request = Request.all_joined.select{|request| request[:id] == params[:id] }.first
+    erb :'makersbnb/requests/id'
+  end
+
+   post '/makersbnb/requests/:id' do
+    # FIX THIS
+    @request_object = Request.all(params[:id])
+    print @request_object.start_date
+    if params[:Accept]
+      @request_object.update_booking_request(params[:Accept])
+    else
+      @request_object.update_booking_request(params[:Decline])
+    end
+    erb :'/makersbnb'
+   end
   
   run! if app_file == $0
 end
