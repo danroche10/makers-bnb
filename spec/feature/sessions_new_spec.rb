@@ -34,18 +34,18 @@ feature 'So a user can login' do
 end
 
 feature "once logged in, user should be able to log out" do
-  scenario "by clicking on the sign out button" do
+  scenario "by clicking on the Log out button" do
     new_user_login
     log_in_details
-    expect(page).to have_button("Sign out")
-    click_button('Sign out')
+    expect(page).to have_button("Log out")
+    click_button('Log out')
     expect(page).to have_button 'Login'
   end
-    scenario "if logged in, the about us page should allow to sign out" do
+    scenario "if logged in, the about us page should allow to Log out" do
       new_user_login
       log_in_details
-      expect(page).to have_button("Sign out")
-      click_button('Sign out')
+      expect(page).to have_button("Log out")
+      click_button('Log out')
       expect(page).to have_button 'Login'
     end
 end

@@ -1,7 +1,7 @@
 <% if @user %>
 <h4> Logged in as <%= @user.email%></h4>
-<form action="/makersbnb/sessions/destroy" method="POST">
-  <input type="submit" value="Sign out">
+<form action="/makersbnb/sessions/logout" method="POST">
+  <input type="submit" value="Log out">
 </form>
 <% end %>
 About us
