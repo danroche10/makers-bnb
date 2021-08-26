@@ -106,10 +106,10 @@ class MakersBnB < Sinatra::Base
     erb :'makersbnb/requests'
   end
 
-   get '/makersbnb/requests/:id' do
+  get '/makersbnb/requests/:id' do
     @host_request = Request.all_joined.select{|request| request[:id] == params[:id] }.first
     erb :'makersbnb/requests/id'
-   end
+  end
 
    post '/makersbnb/requests/:id' do
     # FIX THIS
