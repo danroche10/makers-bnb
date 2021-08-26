@@ -1,8 +1,8 @@
 feature 'filter spaces' do
-  xscenario 'enter dates and see available spaces' do
-    add_test_spaces
-    # add_test_requests
-    visit('/makersbnb/space')
+  scenario 'enter dates and see available spaces' do
+    add_test_data
+    login
+    visit('/makersbnb/spaces')
     fill_in("start_date", with: '2021-08-25')
     fill_in("end_date", with: '2021-09-01')
     click_button('Filter Spaces by Date')
@@ -11,10 +11,10 @@ feature 'filter spaces' do
     expect(page).to have_content('space3')
   end
 
-  xscenario 'enter dates and then clear to see all spaces' do
-    add_test_spaces
-    # add_test_requests
-    visit('/makersbnb/space')
+  scenario 'enter dates and then clear to see all spaces' do
+    add_test_data
+    login
+    visit('/makersbnb/spaces')
     fill_in("start_date", with: '2021-08-25')
     fill_in("end_date", with: '2021-09-01')
     click_button('Filter Spaces by Date')
