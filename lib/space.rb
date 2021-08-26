@@ -42,7 +42,9 @@ class Space
   end
 
   def self.check_availability(start_date, end_date, space_id)
+    connect_db
     booked = @connection.exec("SELECT * FROM requests WHERE space_id='#{space_id.to_i}' AND approval_status=true AND start_date BETWEEN '#{start_date}' AND '#{end_date}' OR approval_status=true AND end_date BETWEEN '#{start_date}' AND '#{end_date}'")
+    p booked
     booked.nil? ? true : false
   end
 
@@ -56,4 +58,5 @@ class Space
 end
 
 
-p Space.check_availability("2021-10-05", "2021-10-25", "1")
+p Space.check_availability("2021-10-05", "2021-10-25", "2") # clashing so should return true
+p Space.check_availability("2021-11-05", "2021-11-25", "2") # should return false

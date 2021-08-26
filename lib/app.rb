@@ -66,7 +66,7 @@ class MakersBnB < Sinatra::Base
   post '/makersbnb/spaces/:id' do
     p params
     session[:availability] = Space.check_availability(params[:start_date], params[:end_date], params[:space_id])
-    redirect '/makersbnb/spaces/:id'
+    redirect back
   end
 
   get '/makersbnb/about' do
