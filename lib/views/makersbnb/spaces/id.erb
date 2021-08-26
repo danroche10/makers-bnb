@@ -27,8 +27,10 @@
     <form action='/makersbnb/spaces/<%= @space.id %>' method='post'>
       <input type='submit' value='Request the Space'>
     </form>
-  <% else %>
+  <% elsif @availability == false %>
     Sorry, the space is not available for these dates. Try another set of dates.
+  <% else %>
+
   <% end %>
     </ul>
   </body>
