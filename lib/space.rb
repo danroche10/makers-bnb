@@ -41,6 +41,13 @@ class Space
     Space.new(result[0]['id'], result[0]['name'], result[0]['description'], result[0]['price'], result[0]['user_id'])
   end
 
+  def self.check_availability(start_date, end_date, space_id)
+    connect_db
+    booked = @connection.exec("SELECT * FROM requests WHERE space_id='#{space_id}' approval_status=true AND start_date BETWEEN' \ 
+      ''#{start_date}' AND '#{end_date}' OR approval_status=true AND end_date BETWEEN '#{start_date}' AND '#{end_date}'")
+    booked.nil? ? false : true
+  end
+
   def self.connect_db
     if ENV['ENVIRONMENT'] == 'test'
       @connection = PG.connect(dbname: 'makers_bnb_test')

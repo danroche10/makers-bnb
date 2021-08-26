@@ -16,7 +16,7 @@ def add_test_spaces
 end
 
 def add_test_requests
-  Request.create(start_date: '2021-08-25', end_date: '2021-09-01',  user_id: 1, space_id: 1, approval_status: TRUE)
+  Request.create(start_date: '2021-08-25', end_date: '2021-09-01',  user_id: 1, space_id: 1, approval_status: true)
   Request.create(start_date: '2021-10-02', end_date: '2021-10-06',  user_id: 1, space_id: 1, approval_status: nil)
   Request.create(start_date: '2021-11-03', end_date: '2021-11-07',  user_id: 1, space_id: 1, approval_status: nil)
 end
