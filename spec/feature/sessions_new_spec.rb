@@ -22,14 +22,16 @@ feature 'So a user can login' do
     fill_in('password', with: 'test')
     click_button('Login')
     expect(page).not_to have_content("Book A Space")
+    expect(page).to have_content("You have entered incorrect details")
   end
 
-  scenario 'user enters incorrect email' do
+  scenario 'user enters incorrect password' do
     new_user_login
     fill_in('email', with: 'test@test.com' )
     fill_in('password', with: 'wrongpassword')
     click_button('Login')
     expect(page).not_to have_content("Book A Space")
+    expect(page).to have_content "You have entered incorrect details"
   end  
 end
 

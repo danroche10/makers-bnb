@@ -1,6 +1,7 @@
 require 'sinatra'
 require 'sinatra/base'
 require 'sinatra/reloader'
+require 'sinatra/flash'
 require_relative 'space'
 require './lib/user'
 require './lib/request'
@@ -8,6 +9,7 @@ require './lib/request'
 class MakersBnB < Sinatra::Base
   configure :development do
     register Sinatra::Reloader
+    register Sinatra::Flash
   end
 
   enable :sessions
@@ -26,6 +28,7 @@ class MakersBnB < Sinatra::Base
       session[:user_id] = new_user.id
       redirect '/makersbnb/spaces'
     else
+      flash[:notice] = 'You have entered incorrect details'
       redirect '/makersbnb'
     end
   end
@@ -77,6 +80,7 @@ class MakersBnB < Sinatra::Base
       session[:user_id] = authenticated_user.id
       redirect('/makersbnb/spaces')
     else
+      flash[:notice] = 'You have entered incorrect details'
       redirect('/makersbnb/login')
     end 
   end
