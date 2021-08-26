@@ -60,13 +60,14 @@ class MakersBnB < Sinatra::Base
     @user = User.find(session[:user_id]) unless session[:user_id].nil?
     @space = Space.find(params[:id])
     @availablility = session[:availability]
+    p @availability
     erb(:'makersbnb/spaces/id')
   end
 
   post '/makersbnb/spaces/:id' do
-    p params
     session[:availability] = Space.check_availability(params[:start_date], params[:end_date], params[:space_id])
-    redirect back
+    p session[:availability]
+    redirect '/makersbnb/spaces/1'
   end
 
   get '/makersbnb/about' do
