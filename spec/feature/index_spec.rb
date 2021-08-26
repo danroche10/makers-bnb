@@ -33,5 +33,14 @@ feature "user can sign up for makers bnb" do
     expect(page).to have_button "Log out"
   end
 end
+feature "Once logged in, users can log out" do
+  scenario "by clicking the log out button" do
+    new_user_login
+    log_in_details
+    expect(page).to have_button "Log out"
+    click_button("Log out")
+    expect(page).to have_button "Login"
+  end 
+end
 
 
