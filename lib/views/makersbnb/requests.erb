@@ -20,8 +20,16 @@
     <% end %>
    <br></br>
    <h5>requests for property</h5>
-    <% @host_requests.each do |requests| %>
-      <li><%= requests[:start_date] %></li>
+    <% @host_requests.each do |request| %>
+      <li>Guest: <%= request[:email] %></li>
+      <li>Start date: <%= request[:start_date] %></li>
+      
+      <% if request[:approval_status] == nil %>
+      <div>Approval status: Pending</div>
+      <% else %>
+      <div>Approval status: Confirmed</div>
+      <% end %>
+      <a href='/makersbnb/requests/<%= request[:id] %>'>View</a>
     <% end %>
   </body>
 </html>

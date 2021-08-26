@@ -13,6 +13,14 @@ class Request
     @approval_status = approval_status
   end
 
+  def update_booking_request(response)
+    if response == "Accept" 
+      @approval_status = true
+    else
+      @approval_status = false
+    end
+  end
+
   def self.create(start_date:, end_date:, user_id:, space_id:, approval_status:)
     connect_db
       result = @con.exec(

@@ -105,6 +105,23 @@ class MakersBnB < Sinatra::Base
     @host_requests = Request.all_joined.select{|request| request[:host_user_id] == user_id}
     erb :'makersbnb/requests'
   end
+
+   get '/makersbnb/requests/:id' do
+    @host_request = Request.all_joined.select{|request| request[:id] == params[:id] }.first
+    erb :'makersbnb/requests/id'
+   end
+
+   post '/makersbnb/requests/:id' do
+    # FIX THIS
+    @request_object = Request.all(params[:id])
+    print @request_object.start_date
+    if params[:Accept]
+      @request_object.update_booking_request(params[:Accept])
+    else
+      @request_object.update_booking_request(params[:Decline])
+    end
+    erb :'/makersbnb'
+   end
   
   run! if app_file == $0
 end
