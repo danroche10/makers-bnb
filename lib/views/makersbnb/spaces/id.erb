@@ -20,15 +20,20 @@
   <form action='/makersbnb/spaces/<%= @space.id %>' method='POST'>
     <input type='date' placeholder='Available From (dd-mm-yyyy)' value"" name='start_date' required>
     <input type='date' placeholder='Available To (dd-mm-yyyy)' value"" name='end_date' required>
+    <input type='hidden' name='space_id' value=<%= @space.id %>>
     <input type='submit' value='Check availability'>
   </form>
+  <br>
+  <br>
   <% if @availability == true %>
     Space is available! Go ahead and make a request.
-    <form action='/makersbnb/spaces/<%= @space.id %>' method='post'>
+    <form action='/makersbnb/requests' method='post'><br>
       <input type='submit' value='Request the Space'>
     </form>
-  <% else %>
+  <% elsif @availability == false %>
     Sorry, the space is not available for these dates. Try another set of dates.
+  <% else %>
+
   <% end %>
     </ul>
   </body>

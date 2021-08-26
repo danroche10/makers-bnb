@@ -43,6 +43,7 @@ class MakersBnB < Sinatra::Base
     @user = User.find(session[:user_id]) unless session[:user_id].nil?
     @space_filtered = Space.filter(params[:start_date], params[:end_date])
     @space_list = Space.all
+    session[:availability] = nil
     erb(:'makersbnb/spaces')
   end
 
@@ -59,13 +60,16 @@ class MakersBnB < Sinatra::Base
   get '/makersbnb/spaces/:id' do
     @user = User.find(session[:user_id]) unless session[:user_id].nil?
     @space = Space.find(params[:id])
-    @availablility = session[:availability]
+    @availability = session[:availability]
     erb(:'makersbnb/spaces/id')
   end
 
   post '/makersbnb/spaces/:id' do
+    session[:request] = nil
+    # session[:availability] = nil
     session[:availability] = Space.check_availability(params[:start_date], params[:end_date], params[:space_id])
-    redirect '/makersbnb/spaces/:id'
+    session[:request] = Request.new(id: 1, start_date: params[:start_date], end_date: params[:end_date], user_id: session[:user_id], space_id: params[:space_id], approval_status: nil)
+    redirect back
   end
 
   get '/makersbnb/about' do
@@ -98,12 +102,21 @@ class MakersBnB < Sinatra::Base
   end
 
   get '/makersbnb/requests' do
+    @request_info = session[:confirmed_request]
+    Request.create(start_date: @request_info.start_date, end_date: @request_info.end_date, user_id: @request_info.user_id, space_id: @request_info.space_id, approval_status: nil) unless @request_info.nil?
+    session[:confirmed_request] = nil
     @user = User.find(session[:user_id]) unless session[:user_id].nil?
     user_id = @user.id
     @requests = Request.all_joined
     @guest_requests = Request.all_joined.select{|request| request[:guest_user_id] == user_id}
     @host_requests = Request.all_joined.select{|request| request[:host_user_id] == user_id}
     erb :'makersbnb/requests'
+  end
+
+  post '/makersbnb/requests' do
+    session[:confirmed_request] = session[:request]
+    session[:availability] = nil
+    redirect('/makersbnb/requests')
   end
 
   get '/makersbnb/requests/:id' do
