@@ -2,19 +2,20 @@ require 'pg'
 
 class Space
 
-  attr_reader :id, :name, :description, :price
+  attr_reader :id, :name, :description, :price, :user_id
 
-  def initialize(id, name, description, price)
+  def initialize(id, name, description, price, user_id)
     @id = id
     @name = name
     @description = description
     @price = price
+    @user_id = user_id
   end
 
   def self.all
     connect_db
     @connection.exec('SELECT * FROM spaces').map do |space| 
-      Space.new(space['id'], space['name'], space['description'], space['price'])
+      Space.new(space['id'], space['name'], space['description'], space['price'], space['user_id'])
     end
   end
 
@@ -28,17 +29,17 @@ class Space
   end
 
   # add user_id as an argument
-  def self.create(name, description, price)
+  def self.create(name, description, price, user_id)
     connect_db
-    result = @connection.exec_params('INSERT INTO spaces (name, description, price)' \
-    'VALUES ($1, $2, $3) RETURNING id;', [name, description, price])
-    Space.new(result[0]['id'], name, description, price)
+    result = @connection.exec_params('INSERT INTO spaces (name, description, price, user_id)' \
+    'VALUES ($1, $2, $3, $4) RETURNING id;', [name, description, price, user_id])
+    Space.new(result[0]['id'], name, description, price, user_id)
   end
 
   def self.find(id)
     connect_db
     result = @connection.exec("SELECT * FROM spaces WHERE id = $1", [id])
-    Space.new(result[0]['id'], result[0]['name'], result[0]['description'], result[0]['price'])
+    Space.new(result[0]['id'], result[0]['name'], result[0]['description'], result[0]['price'], result[0]['user_id'])
   end
 
   def self.connect_db

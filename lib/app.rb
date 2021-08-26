@@ -29,6 +29,12 @@ class MakersBnB < Sinatra::Base
       redirect '/makersbnb'
     end
   end
+  
+  ['/makersbnb/spaces*', '/makersbnb/requests*'].each do |path|
+    before path do
+      redirect '/makersbnb/login' if session[:user_id].nil?
+    end
+  end
 
   get '/makersbnb/spaces' do
     @user = User.find(session[:user_id]) unless session[:user_id].nil?
@@ -43,7 +49,7 @@ class MakersBnB < Sinatra::Base
   end
 
   post '/makersbnb/spaces/new' do
-    Space.create(params[:name], params[:description], params[:price])
+    Space.create(params[:name], params[:description], params[:price], User.find(session[:user_id]).id)
     redirect '/makersbnb/spaces'
   end
 
