@@ -1,7 +1,8 @@
 feature 'view a space' do
-  xscenario 'click on individual space' do
-    add_test_spaces
-    visit ('/makersbnb/spaces')
+  scenario 'click on individual space' do
+    add_test_data
+    login
+    visit('/makersbnb/spaces')
     click_link('space1')
     expect(page).to have_current_path('/makersbnb/spaces/1')
     expect(page).to have_content('space1')

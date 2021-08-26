@@ -10,15 +10,15 @@ def add_test_users
 
 
 def add_test_spaces
-  Space.create('space1', 'semi comfortable', 10000)
-  Space.create('space2', 'very comfortable', 10)
-  Space.create('space3', 'uncomfortable', 100000)
+  Space.create('space1', 'semi comfortable', 10000, 2)
+  Space.create('space2', 'very comfortable', 10, 3)
+  Space.create('space3', 'uncomfortable', 100000, 3)
 end
 
 def add_test_requests
-  Request.create(start_date: '2021-09-01', end_date: '2021-09-5',  user_id: 1, space_id: 1, approval_status: nil)
-  Request.create(start_date: '2021-09-02', end_date: '2021-09-6',  user_id: 1, space_id: 1, approval_status: nil)
-  Request.create(start_date: '2021-09-03', end_date: '2021-09-7',  user_id: 1, space_id: 1, approval_status: nil)
+  Request.create(start_date: '2021-08-25', end_date: '2021-09-01',  user_id: 1, space_id: 1, approval_status: true)
+  Request.create(start_date: '2021-10-02', end_date: '2021-10-06',  user_id: 1, space_id: 1, approval_status: nil)
+  Request.create(start_date: '2021-11-03', end_date: '2021-11-07',  user_id: 1, space_id: 1, approval_status: nil)
 end
 
 def add_test_data
