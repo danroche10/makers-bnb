@@ -16,13 +16,12 @@
   </head>
   <br></br>
   <body>
-  <h5>requests for bookings</h5>
+  <h3>Requests for Bookings</h3>
+  <% if @guest_requests.length > 0 %>
   <ol>
     <% @guest_requests.each do |request| %>
       <li>
       Name: <%= request[:space_name] %>
-      <br>
-      Description: <%= request[:description] %>
       <br>
       Price: £<%= request[:price] %>
       <br>
@@ -41,7 +40,11 @@
     <% end %>
    <br></br>
    </ol>
-   <h5>requests for property</h5>
+    <% else %>
+    You have made no requests
+  <% end %>
+   <h3>Requests for Property</h3>
+      <% if @host_requests.length > 0 %>
    <ol>
     <% @host_requests.each do |request| %>
       <li>Guest: <%= request[:email] %>
@@ -55,10 +58,12 @@
       <% else %>
       Approval status: Pending</li>
       <% end %>
-      <br>
       <a href='/makersbnb/requests/<%= request[:id] %>'>View</a>
       <br></br>
     <% end %>
     </ol>
+  <% else %>
+    You have no bookings
+  <% end %>
   </body>
 </html>
