@@ -1,4 +1,21 @@
-
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>A DIY BNB</title>
+    <% if @user %>
+      <h4> Logged in as <%= @user.email%></h4>
+      <form action="/makersbnb/logout" method="POST">
+        <input type="submit" value="Log out">
+      </form>
+    <% end %>
+    <a href="/makersbnb/about" >About us</a>
+    <br>
+    <a href="/makersbnb/requests" >Requests</a>
+    <br>
+    <a href="/makersbnb/spaces" >Spaces</a>
+    <br>
+  </head>
+  <body>
 
 My booking:
 <li>start date:<%= @host_request[:start_date] %></li>
@@ -7,10 +24,12 @@ My booking:
 
 <form action="/makersbnb/requests/<%= @host_request[:id] %>" method="POST">
   <input type="submit" value="Accept">
-  <input type="hidden" value="Accept">
+  <input type="hidden" name="Accept" value="Accept">
 </form>
 
 <form action="/makersbnb/requests/<%= @host_request[:id] %>" method="POST">
   <input type="submit" value="Decline">
-  <input type="hidden" value="Decline">
+  <input type="hidden" name="Decline" value="Decline">
 </form>
+</body>
+</html

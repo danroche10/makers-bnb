@@ -129,13 +129,13 @@ class MakersBnB < Sinatra::Base
   post '/makersbnb/requests/:id' do
     # FIX THIS
     @request_object = Request.find_by_id(params[:id])
-    Request.accept_booking_request(params[:id])
+    # Request.accept_booking_request(params[:id])
     # print @request_object.approval_status
-    # if params[:Accept]
-    #   @request_object.confirm_booking_request
-    # else
-    #   @request_object.decline_booking_request
-    # end
+    if params[:Accept]
+      Request.accept_booking_request(params[:id])
+    else
+      Request.decline_booking_request(params[:id])
+    end
     redirect('/makersbnb/requests')
   end
   
