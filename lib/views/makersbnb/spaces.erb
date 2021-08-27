@@ -2,6 +2,7 @@
 <html>
   <head>
     <title>A DIY BNB</title>
+        <link rel="stylesheet" type="text/css" href="/style.css">
     <% if @user %>
       <h4> Logged in as <%= @user.email%></h4>
       <form action="/makersbnb/logout" method="POST">
@@ -15,6 +16,7 @@
     <a href="/makersbnb/spaces" >Spaces</a>
   </head>
   <body>
+  <div class="overlay">
   <h1>Book a Space </h1>
   <form action='/makersbnb/spaces/new'>
     <input type='submit' value='List a Space'>
@@ -29,6 +31,7 @@
     <input type='date' placeholder='Available To (dd-mm-yyyy)' value"" name='end_date' id='end_date' required>
     <input type='submit' value='Filter Spaces by Date'>
   </form>
+    <br>
   <ol>
     <% if @space_filtered.nil? %>
       <% @space_list.each do |space| %>

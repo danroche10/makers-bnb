@@ -2,6 +2,7 @@
 <html>
   <head>
     <title>A DIY BNB</title>
+            <link rel="stylesheet" type="text/css" href="/style.css">
     <% if @user %>
       <h4> Logged in as <%= @user.email%></h4>
       <form action="/makersbnb/logout" method="POST">
@@ -16,6 +17,7 @@
     <br>
   </head>
   <body>
+  <div class="overlay">
 
 My booking:
 <li>start date:<%= @host_request[:start_date] %></li>

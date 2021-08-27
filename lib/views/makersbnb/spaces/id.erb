@@ -2,6 +2,7 @@
 <html>
   <head>
   <title>A DIY BNB</title>
+          <link rel="stylesheet" type="text/css" href="/style.css">
   <% if @user %>
     <h4> Logged in as <%= @user.email%></h4>
     <form action="/makersbnb/logout" method="POST">
@@ -15,6 +16,7 @@
   <a href="/makersbnb/spaces" >Spaces</a>
   </head>
   <body>
+  <div class="overlay">
   <br>
   <h2><%= @space.name %>&nbsp;&nbsp;-&nbsp;&nbsp;£<%= @space.price %></h2>
   <br>

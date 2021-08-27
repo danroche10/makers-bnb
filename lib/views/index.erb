@@ -1,7 +1,9 @@
 <!DOCTYPE html>
 <html>
-<head>
+<header>
+<%# <div class="overlay"> %>
 <title>MakersBnB!</title>
+    <link rel="stylesheet" type="text/css" href="/style.css">
 <% if @user %>
 <h4> Logged in as <%= @user.email%></h4>
 <form action="/makersbnb/logout" method="POST">
@@ -13,15 +15,16 @@
 </form>
 <% end %>
 <a href="/makersbnb/about" >About</a>
-</head>
-<body>
+</header>
+<body id='home'>
+<div class="overlay">
 <h1>Welcome to MakersBnB!</h1>
 <h3>Feel at home with us!</h3>
 <% if !@user %>
 <form action="/makersbnb" method="POST">
-  <input type="email" placeholder="enter your e-mail" name="email" >
+  <input type="email" placeholder="enter your e-mail" name="email"  required>
   <br></br>
-  <input type="password" placeholder="password" name="password">
+  <input type="password" placeholder="password" name="password" required>
   <br></br>
   <input type="password" placeholder="confirm password" name="password_confirmation">
   <br></br>
