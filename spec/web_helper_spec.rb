@@ -16,3 +16,11 @@ def login
   new_user_login
   log_in_details
 end
+
+def login_space_owner
+  visit '/makersbnb'
+  click_button('Login')
+  fill_in('email', with: 'test2@test.com')
+  fill_in('password', with: 'test2')
+  click_button('Login')
+end

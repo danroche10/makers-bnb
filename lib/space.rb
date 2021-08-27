@@ -23,7 +23,7 @@ class Space
     return nil if start_date == nil || end_date == nil
     connect_db
     booked = @connection.exec("SELECT * FROM requests WHERE approval_status=true AND start_date BETWEEN' \ 
-    ''#{start_date}' AND '#{end_date}' OR approval_status=true AND end_date BETWEEN '#{start_date}' AND '#{end_date}'")
+    ''#{start_date}' AND '#{end_date}' OR approval_status=true AND end_date BETWEEN '#{start_date}' AND '#{end_date}' OR approval_status=true AND start_date < '#{start_date}' AND end_date > '#{end_date}'")
     booked_array = booked.map do |space| space['space_id'] end
     all.delete_if { |space| booked_array.include?(space.id) }
   end

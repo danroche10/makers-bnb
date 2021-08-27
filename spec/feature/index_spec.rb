@@ -2,7 +2,7 @@
 feature 'users can view the home page' do
   scenario 'expects user to see welcome to makersbnb' do
     visit '/makersbnb'
-    expect(page).to have_content 'Welcome to Makersbnb!' 
+    expect(page).to have_content 'Welcome to MakersBnB!' 
   end
 
   scenario 'expect user to see sign up form' do
@@ -29,7 +29,7 @@ feature "user can sign up for makers bnb" do
     fill_in('password', with: 'test')
     fill_in('password_confirmation', with: 'test')
     click_button('Sign up')
-    expect(page).to have_content "Book A Space"
+    expect(page).to have_content "Book a Space"
     expect(page).to have_button "Log out"
   end
 

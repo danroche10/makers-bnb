@@ -15,27 +15,27 @@
     <a href="/makersbnb/spaces" >Spaces</a>
   </head>
   <body>
-  <h1>Book A Space </h1>
+  <h1>Book a Space </h1>
   <form action='/makersbnb/spaces/new'>
     <input type='submit' value='List a Space'>
-  </form>
-  <form action='/makersbnb/spaces'>
-    <input type='date' placeholder='Available From (dd-mm-yyyy)' value"" name='start_date' required>
-    <input type='date' placeholder='Available To (dd-mm-yyyy)' value"" name='end_date' required>
-    <input type='submit' value='Filter Spaces by Date'>
-  </form>
-  <% if @space_filtered %>
+  </form><br>
+    <% if @space_filtered %>
   <form action='/makersbnb/spaces'>
     <input type='submit' value='Clear filter'>
-  </form>
+  </form><br>
   <% end %>
-  <ul>
+  <form action='/makersbnb/spaces'>
+    <input type='date' placeholder='Available From (dd-mm-yyyy)' value"" name='start_date' id='start_date' required>
+    <input type='date' placeholder='Available To (dd-mm-yyyy)' value"" name='end_date' id='end_date' required>
+    <input type='submit' value='Filter Spaces by Date'>
+  </form>
+  <ol>
     <% if @space_filtered.nil? %>
       <% @space_list.each do |space| %>
         <li>
           Name: <a href='/makersbnb/spaces/<%= space.id %>'><%= space.name %></a>
           <br>
-          Price: <%= space.price %>
+          Price: £<%= space.price %>
           <br>
           Description: <%= space.description %>
         </li>
@@ -53,6 +53,6 @@
         <br>
       <% end %>
     <% end %>
-    </ul>
+    </ol>
   </body>
 </html>

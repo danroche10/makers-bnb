@@ -4,7 +4,7 @@ feature 'So a user can login' do
     visit '/makersbnb'
     click_button('Login')
     expect(page).to have_button('Sign up')
-    expect(page).to have_content('Login to Makersbnb')
+    expect(page).to have_content('Login to MakersBnB')
     expect(page).to have_field("email")
     expect(page).to have_field('password')
     expect(page).to have_button('Login')
@@ -13,7 +13,7 @@ feature 'So a user can login' do
   scenario 'user enters correct details' do
     new_user_login
     log_in_details
-    expect(page).to have_content("Book A Space")
+    expect(page).to have_content("Book a Space")
   end
 
   scenario 'user enters incorrect email' do
@@ -21,7 +21,7 @@ feature 'So a user can login' do
     fill_in('email', with: 'wrongemail@test.com')
     fill_in('password', with: 'test')
     click_button('Login')
-    expect(page).not_to have_content("Book A Space")
+    expect(page).not_to have_content("Book a Space")
     expect(page).to have_content("You have entered incorrect details")
   end
 
@@ -30,7 +30,7 @@ feature 'So a user can login' do
     fill_in('email', with: 'test@test.com' )
     fill_in('password', with: 'wrongpassword')
     click_button('Login')
-    expect(page).not_to have_content("Book A Space")
+    expect(page).not_to have_content("Book a Space")
     expect(page).to have_content "You have entered incorrect details"
   end  
 end
