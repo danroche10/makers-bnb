@@ -1,5 +1,5 @@
 feature 'request a space' do
-  scenario 'as a logged in guest I want to request a space to rent' do
+  xscenario 'as a logged in guest I want to request a space to rent' do
     add_test_data
     login
     visit('/makersbnb/spaces')
@@ -13,7 +13,7 @@ feature 'request a space' do
     expect(page).to have_content('Pending') # needs checking
   end
 
-  scenario 'as a logged in space owner I want to see space requests and approve a request' do
+  xscenario 'as a logged in space owner I want to see space requests and approve a request' do
     add_test_data
     login_space_owner
     visit('/makersbnb')
@@ -26,7 +26,7 @@ feature 'request a space' do
     expect(page).to have_current_path('/makersbnb/requests') # needs checking
   end
 
-  scenario 'as a logged in space owner I want to see space requests and deny a request' do
+  xscenario 'as a logged in space owner I want to see space requests and deny a request' do
     add_test_data
     login_space_owner
     visit('/makersbnb')
