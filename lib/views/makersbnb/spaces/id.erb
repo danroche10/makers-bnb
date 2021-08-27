@@ -13,9 +13,12 @@
   <a href="/makersbnb/requests" >Requests</a>
   </head>
   <body>
-  <h1><%= @space.name %> <%= @space.price %></h1>
   <br>
-  <h3><%= @space.description %></h3>
+  <h2><%= @space.name %>&nbsp;&nbsp;-&nbsp;&nbsp;£<%= @space.price %></h2>
+  <br>
+  <p><%= @space.description %></p> 
+  <br>
+ 
   <br>
   <form action='/makersbnb/spaces/<%= @space.id %>' method='POST'>
     <input type='date' placeholder='Available From (dd-mm-yyyy)' value"" name='start_date' required>

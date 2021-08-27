@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-<title>Makersbnb!</title>
+<title>MakersBnB!</title>
 <% if @user %>
 <h4> Logged in as <%= @user.email%></h4>
 <form action="/makersbnb/sessions/logout" method="POST">
@@ -15,7 +15,7 @@
 <a href="/makersbnb/about" >About</a>
 </head>
 <body>
-<h1>Welcome to Makersbnb!</h1>
+<h1>Welcome to MakersBnB!</h1>
 <h3>Feel at home with us!</h3>
 <% if !@user %>
 <form action="/makersbnb" method="POST">

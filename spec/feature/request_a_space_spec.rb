@@ -9,8 +9,8 @@ feature 'request a space' do
     click_button('Check availability')
     click_button('Request the Space')
     expect(page).to have_current_path('/makersbnb/requests')
-    expect(page).to have_content('space1')
-    expect(page).to have_content('Pending')
+    expect(page).to have_content('2021-12-01') 
+    expect(page).to have_content('Pending') # needs checking
   end
 
   scenario 'as a logged in space owner I want to see space requests and approve a request' do
@@ -21,8 +21,9 @@ feature 'request a space' do
     expect(page).to have_current_path('/makersbnb/requests')
     expect(page).to have_content('2021-08-25')
     expect(page).to have_content('Pending')
-    click_button('Approve')
-    # expect(page).to have_content('xxxx')
+    click_button('View')
+    click_button('Accept')
+    expect(page).to have_current_path('/makersbnb/requests') # needs checking
   end
 
   scenario 'as a logged in space owner I want to see space requests and deny a request' do
@@ -33,7 +34,8 @@ feature 'request a space' do
     expect(page).to have_current_path('/makersbnb/requests')
     expect(page).to have_content('2021-08-25')
     expect(page).to have_content('Pending')
-    click_button('Deny')
-    # expect(page).to have_content('xxxx')
+    click_button('View')
+    click_button('Decline')
+    expect(page).to have_current_path('/makersbnb/requests') # needs checking
   end
 end
