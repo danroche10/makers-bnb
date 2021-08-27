@@ -28,7 +28,16 @@ describe Request do
       user 
       space
       my_request
-      expect(Request.all(1)[0].id).to eq '1'
+      expect(Request.filter(1)[0].id).to eq '1'
+    end
+  end
+
+  describe '#find_by_id' do
+    it 'returns booking request by id' do
+    user 
+    space
+    my_request
+    expect(Request.find_by_id(1).start_date).to eq '2021-09-01'
     end
   end
 

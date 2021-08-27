@@ -92,17 +92,19 @@ class MakersBnB < Sinatra::Base
     end 
   end
 
-  post '/makersbnb/sessions/logout' do
+  post '/makersbnb/logout' do
     session.clear
     redirect('/makersbnb')
   end
 
   get '/makersbnb/requests' do
     @user = User.find(session[:user_id]) unless session[:user_id].nil?
+    print @user
     user_id = @user.id
     @requests = Request.all_joined
     @guest_requests = Request.all_joined.select{|request| request[:guest_user_id] == user_id}
     @host_requests = Request.all_joined.select{|request| request[:host_user_id] == user_id}
+
     erb :'makersbnb/requests'
   end
 
@@ -111,17 +113,18 @@ class MakersBnB < Sinatra::Base
     erb :'makersbnb/requests/id'
   end
 
-   post '/makersbnb/requests/:id' do
+  post '/makersbnb/requests/:id' do
     # FIX THIS
-    @request_object = Request.all(params[:id])
-    print @request_object.start_date
-    if params[:Accept]
-      @request_object.update_booking_request(params[:Accept])
-    else
-      @request_object.update_booking_request(params[:Decline])
-    end
-    erb :'/makersbnb'
-   end
+    @request_object = Request.find_by_id(params[:id])
+    Request.decline_booking_request(params[:id])
+    # print @request_object.approval_status
+    # if params[:Accept]
+    #   @request_object.confirm_booking_request
+    # else
+    #   @request_object.decline_booking_request
+    # end
+    redirect('/makersbnb/requests')
+  end
   
   run! if app_file == $0
 end
