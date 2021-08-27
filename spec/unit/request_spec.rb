@@ -25,11 +25,29 @@ describe Request do
 
   describe '#all' do
     it 'returns all requests for user' do
-      user 
-      space
-      my_request
-      expect(Request.all(1)[0].id).to eq '1'
+      add_test_data
+      expect(Request.filter(1).first.id).to eq '1'
     end
+  end
+
+  describe '#find_by_id' do
+    it 'returns booking request by id' do
+      add_test_data
+    expect(Request.find_by_id(1).start_date).to eq '2021-08-25'
+    end
+  end
+
+  describe '#all_joined' do
+    it 'returns an array of hashes from the join table' do
+      add_test_data
+      expect(described_class.all_joined.length).to eq 3
+    end
+
+    it 'should include the start date and end date' do
+      add_test_data
+      expect(described_class.all_joined.first[:start_date]).to eq '2021-08-25'
+    end
+
   end
 
 end

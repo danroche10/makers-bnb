@@ -13,12 +13,12 @@ class Request
     @approval_status = approval_status
   end
 
-  def update_booking_request(response)
-    if response == "Accept" 
-      @approval_status = true
-    else
-      @approval_status = false
-    end
+  def self.accept_booking_request(id)
+    @con.exec("UPDATE requests SET approval_status = true WHERE id = $1", [id])
+  end
+
+  def self.decline_booking_request(id)
+    @con.exec("UPDATE requests SET approval_status = false WHERE id = $1", [id])
   end
 
   def self.create(start_date:, end_date:, user_id:, space_id:, approval_status:)
@@ -28,12 +28,21 @@ class Request
       Request.new(id: result[0]['id'], start_date: result[0]['start_date'], end_date: result[0]['end_date'], user_id: result[0]['user_id'], space_id: result[0]['space_id'], approval_status: result[0]['approval_status'])    
   end
 
-  def self.all(user_id)
+  def self.filter(user_id)
     connect_db
     @con.exec("SELECT * FROM requests WHERE user_id = $1", [user_id]).map do |request|
       Request.new(id: request['id'], start_date: request['start_date'], end_date: request['end_date'],
       user_id: request['user_id'], space_id: request['space_id'], approval_status: request['approval_status'])
     end
+  end
+
+  def self.find_by_id(id)
+    connect_db
+    result = @con.exec("SELECT * FROM requests WHERE id = $1", [id])
+    # print result['id']
+    Request.new(id: result[0]['id'], 
+      start_date: result[0]['start_date'], end_date: result[0]['end_date'],
+      user_id: result[0]['user_id'], space_id: result[0]['space_id'], approval_status: result[0]['approval_status'])
   end
   
   def self.all_joined
@@ -42,7 +51,7 @@ class Request
     FROM requests
     INNER JOIN users ON requests.user_id=users.id
     INNER JOIN spaces ON requests.space_id=spaces.id;")
-    test = result.map do |request|
+      result.map do |request|
       {"id": request['id'], "start_date": request['start_date'], "end_date": request['end_date'], "guest_user_id": request["guest_id"],
       "space_id": request['space_id'], "approval_status": request['approval_status'], "email": request['email'], "space_name": request["name"],
       "host_user_id": request["host_id"], "description": request["description"], "price": request["price"]}
