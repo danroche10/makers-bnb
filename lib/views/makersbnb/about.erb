@@ -1,11 +1,21 @@
-<% if @user %>
-<h4> Logged in as <%= @user.email%></h4>
-<form action="/makersbnb/sessions/logout" method="POST">
-  <input type="submit" value="Log out">
-</form>
-<% end %>
-<h1>About us</h1>
-
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>A DIY BNB</title>
+    <% if @user %>
+      <h4> Logged in as <%= @user.email%></h4>
+      <form action="/makersbnb/logout" method="POST">
+        <input type="submit" value="Log out">
+      </form>
+    <% end %>
+    <a href="/makersbnb/about" >About us</a>
+    <br>
+    <a href="/makersbnb/requests" >Requests</a>
+    <br>
+    <a href="/makersbnb/spaces" >Spaces</a>
+  </head>
+  <br></br>
+  <body>
 MakersBnB was born on Monday when four unwitting developers were forced together to embark on a exciting journey. <br>
 We have since grown to 4 hosts who have welcomed more than 3 guest arrivals in the local area. <br>
 Every day users discover new bugs on the site but MakersBnB offers one-of-a-kind stays at questionable properties. <br>
@@ -17,3 +27,5 @@ Every day users discover new bugs on the site but MakersBnB offers one-of-a-kind
 <li>Dan Roche</li>
 <li>Mubashar Ali</li>
 </ul>
+</body>
+</html>
