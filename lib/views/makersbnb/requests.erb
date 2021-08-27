@@ -4,32 +4,61 @@
     <title>A DIY BNB</title>
     <% if @user %>
       <h4> Logged in as <%= @user.email%></h4>
-      <form action="/makersbnb/sessions/logout" method="POST">
+      <form action="/makersbnb/logout" method="POST">
         <input type="submit" value="Log out">
       </form>
     <% end %>
     <a href="/makersbnb/about" >About us</a>
     <br>
     <a href="/makersbnb/requests" >Requests</a>
+    <br>
+    <a href="/makersbnb/spaces" >Spaces</a>
   </head>
   <br></br>
   <body>
   <h5>requests for bookings</h5>
+  <ol>
     <% @guest_requests.each do |request| %>
-      <li><%= request[:start_date] %></li>
+      <li>
+      Name: <%= request[:space_name] %>
+      <br>
+      Description: <%= request[:description] %>
+      <br>
+      Price: £<%= request[:price] %>
+      <br>
+      Start date: <%= request[:start_date] %>
+      <br>
+      End date: <%= request[:end_date] %>
+      <br>
+     <% if request[:approval_status] == 't' %>
+     Approval status: Confirmed
+      <% elsif request[:approval_status] == 'f'  %>
+      Approval status: Declined
+      <% else %>
+      Approval status: Pending</li>
+      <% end %>
+      <br>
     <% end %>
    <br></br>
+   </ol>
    <h5>requests for property</h5>
+   <ol>
     <% @host_requests.each do |request| %>
-      <li>Guest: <%= request[:email] %></li>
-      <li>Start date: <%= request[:start_date] %></li>
-      
-      <% if request[:approval_status] == nil %>
-      <div>Approval status: Pending</div>
+      <li>Guest: <%= request[:email] %>
+      <br>
+      Start date: <%= request[:start_date] %>
+      <br>
+     <% if request[:approval_status] == 't' %>
+     Approval status: Confirmed
+      <% elsif request[:approval_status] == 'f'  %>
+      Approval status: Declined
       <% else %>
-      <div>Approval status: Confirmed</div>
+      Approval status: Pending</li>
       <% end %>
+      <br>
       <a href='/makersbnb/requests/<%= request[:id] %>'>View</a>
+      <br></br>
     <% end %>
+    </ol>
   </body>
 </html>

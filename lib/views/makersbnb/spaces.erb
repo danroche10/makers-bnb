@@ -4,13 +4,15 @@
     <title>A DIY BNB</title>
     <% if @user %>
       <h4> Logged in as <%= @user.email%></h4>
-      <form action="/makersbnb/sessions/logout" method="POST">
+      <form action="/makersbnb/logout" method="POST">
         <input type="submit" value="Log out">
       </form>
     <% end %>
     <a href="/makersbnb/about" >About us</a>
     <br>
     <a href="/makersbnb/requests" >Requests</a>
+    <br>
+    <a href="/makersbnb/spaces" >Spaces</a>
   </head>
   <body>
   <h1>Book A Space </h1>
